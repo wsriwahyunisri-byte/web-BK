@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukasi BK - Bimbingan Konseling Siswa</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #ffd700;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            background: #ffd700;
+            color: #333;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        /* Materi Cards */
+        .materi {
+            background: #f8f9fa;
+        }
+
+        .materi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Konseling */
+        .konseling {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .konseling-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .konseling-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .chat-button {
+            background: white;
+            color: #333;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .konseling-image i {
+            font-size: 10rem;
+            opacity: 0.8;
+        }
+
+        /* Quiz */
+        .karier {
+            background: #f8f9fa;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-question h3 {
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #667eea;
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .next-btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        .next-btn:hover {
+            background: #5a67d8;
+        }
+
+        .result-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+            font-weight: bold;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            z-index: 1500;
+            font-family: inherit;
+        }
+
+        .chat-header {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.bot {
+            background: white;
+            border: 1px solid #e0e0e0;
+            margin-right: auto;
+        }
+
+        .chat-input {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .chat-input input:focus {
+            border-color: #667eea;
+        }
+
+        .chat-input button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .chat-input button:hover {
+            background: #5a67d8;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: #667eea;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .konseling-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .chat-widget {
+                width: 90vw;
+                right: 5vw;
+                height: 70vh;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>BK Edukasi</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#materi">Materi</a></li>
+                    <li><a href="#konseling">Konseling</a></li>
+                    <li><a href="#karier">Karier</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Selamat Datang di Edukasi BK</h1>
+            <p>Bimbingan dan Konseling untuk Masa Depan Cerahmu</p>
+            <button class="cta-button" onclick="scrollToSection('materi')">
+                <i class="fas fa-book"></i> Mulai Belajar
+            </button>
+        </div>
+    </section>
+
+    <!-- Materi BK Section -->
+    <section id="materi" class="materi">
+        <div class="container">
+            <h2 class="section-title">Materi Bimbingan Konseling</h2>
+            <div class="materi-grid">
+                <div class="card" onclick="openModal('modal1')">
+                    <i class="fas fa-heart"></i>
+                    <h3>Kesehatan Mental</h3>
+                    <p>Mengatasi stres, anxiety, dan menjaga kesejahteraan emosional</p>
+                </div>
+                <div class="card" onclick="openModal('modal2')">
+                    <i class="fas fa-users"></i>
+                    <h3>Hubungan Sosial</h3>
+                    <p>Membangun pertemanan yang sehat dan mengatasi konflik</p>
+                </div>
+                <div class="card" onclick="openModal('modal3')">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Perencanaan Karir</h3>
+                    <p>Menemukan passion dan merencanakan masa depan karir</p>
+                </div>
+                <div class="card" onclick="openModal('modal4')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Belajar Efektif</h3>
+                    <p>Teknik belajar, manajemen waktu, dan motivasi belajar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Konseling Section -->
+    <section id="konseling" class="konseling">
+        <div class="container">
+            <h2 class="section-title">Layanan Konseling Online</h2>
+            <div class="konseling-content">
+                <div class="konseling-text">
+                    <h3>Butuh Bantuan?</h3>
+                    <p>Kami siap mendengarkan dan membantu mengatasi masalahmu. Konselor profesional tersedia 24/7</p>
+                    <button class="chat-button" onclick="openChat()">
+                        <i class="fas fa-comments"></i> Chat dengan Konselor
+                    </button>
+                </div>
+                <div class="konseling-image">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Karir Section -->
+    <section id="karier" class="karier">
+        <div class="container">
+            <h2 class="section-title">Tes Minat Bakat Karir</h2>
+            <div class="quiz-container">
+                <div class="quiz-question" id="quiz">
+                    <h3>Pilih jawaban yang paling sesuai dengan dirimu:</h3>
+                    <div class="options">
+                        <button class="option-btn" onclick="selectAnswer(1)">Suka bekerja dengan orang lain</button>
+                        <button class="option-btn" onclick="selectAnswer(2)">Lebih suka bekerja sendiri</button>
+                        <button class="option-btn" onclick="selectAnswer(3)">Suka berkreasi dan seni</button>
+                        <button class="option-btn" onclick="selectAnswer(4)">Suka angka dan logika</button>
+                    </div>
+                    <button class="next-btn" onclick="nextQuestion()" id="nextBtn" style="display:none;">Lanjut</button>
+                </div>
+                <div class="result" id="result" style="display:none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h2><i class="fas fa-heart"></i> Kesehatan Mental</h2>
+            <div style="margin-top: 1rem;">
+                <p><strong>✅ Tips Mengatasi Stres:</strong></p>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>• Teknik Pomodoro (25 menit belajar, 5 menit istirahat)</li>
+                    <li>• Olahraga 30 menit/hari</li>
+                    <li>• Tidur 7-8 jam/malam</li>
+                    <li>• Curhat ke orang terdekat</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h2><i class="fas fa-users"></i> Hubungan Sosial</h2>
+            <div style="margin-top: 1rem;">
+                <p><strong>✅ Cara Membangun Pertemanan:</strong></p>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>• Sapa teman setiap hari</li>
+                    <li>• Dengarkan dengan aktif</li>
+                    <li>• Bantu saat dibutuhkan</li>
+                    <li>• Rayakan kesuksesan mereka</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2><i class="fas fa-chart-line"></i> Perencanaan Karir</h2>
+            <div style="margin-top: 1rem;">
+                <p><strong>✅ Langkah Menemukan Passion:</strong></p>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>• Kenali kekuatan & kelemahan</li>
+                    <li>• Coba berbagai aktivitas</li>
+                    <li>• Pelajari jurusan kuliah</li>
+                    <li>• Ikut magang/pengalaman kerja</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <h2><i class="fas fa-graduation-cap"></i> Belajar Efektif</h2>
+            <div style="margin-top: 1rem;">
+                <p><strong>✅ Teknik Belajar Ampuh:</strong></p>
+                <ul style="text-align: left; margin-top: 1rem;">
+                    <li>• Active Recall (tes diri sendiri)</li>
+                    <li>• Spaced Repetition</li>
+                    <li>• Feynman Technique</li>
+                    <li>• Belajar dalam kelompok kecil</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div id="chatWidget" class="chat-widget" style="display:none;">
+        <div class="chat-header">
+            <span><i class="fas fa-user-cog"></i> Konselor BK</span>
+            <span class="chat-close" onclick="closeChat()">&times;</span>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">Halo! 👋 Ada yang bisa saya bantu hari ini?</div>
+            <div class="message bot">Kamu bisa cerita tentang belajar, teman, karir, atau apa saja!</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Ketik pesanmu disini..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <p><i class="fas fa-heart"></i> &copy; 2024 Edukasi BK. Dibuat dengan ❤️ untuk siswa Indonesia. <br>
+            <small>Website Bimbingan Konseling Sekolah</small></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Navbar mobile
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Quiz Karir
+        let currentQuestion = 0;
+        let score = { social: 0, independent: 0, creative: 0, analytical: 0 };
+        const questions = [
+            "Pilih jawaban yang paling sesuai dengan dirimu:",
+            "Bagaimana kamu belajar paling efektif?",
+            "Aktivitas apa yang paling kamu nikmati?",
+            "Dalam tim, kamu lebih suka role apa?",
+            "Pada akhir pekan, kamu lebih suka..."
+        ];
+
+        function selectAnswer(type) {
+            score[`type${type}`] = (score[`type${type}`] || 0) + 1;
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.style.background = '#f0f0f0';
+                btn.disabled = true;
+            });
+            document.getElementById('nextBtn').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < 5) {
+                // Reset options
+                document.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.style.background = 'white';
+                    btn.disabled = false;
+                    btn.textContent = `Pilih opsi ${currentQuestion + 1}`;
+                });
+                document.getElementById('nextBtn').style.display = 'none';
+                document.querySelector('.quiz-question h3').textContent = questions[currentQuestion];
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('quiz').style.display = 'none';
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let maxScore = 0;
+            let resultType = 'type1';
+            Object.keys(score).forEach(key => {
+                if (score[key] > maxScore) {
+                    maxScore = score[key];
+                    resultType = key;
+                }
+            });
+            
+            const results = {
+                type1: "🎉 <strong>PSIKOLOG / GURU / HRD / SALES</strong><br><br> Kamu tipe sosial yang suka berinteraksi dengan orang lain!",
+                type2: "💻 <strong>PROGRAMMER / PENELITI / AKUNTAN</strong><br><br> Kamu fokus dan mandiri, cocok kerja individu!",
+                type3: "🎨 <strong>DESAINER / SENIMAN / CONTENT CREATOR</strong><br><br> Kreativitasmu luar biasa, dunia seni menantimu!",
+                type4: "🔬 <strong>INSINYUR / DOKTER / ANALIS DATA</strong><br><br> Logika dan analisis adalah kekuatanmu!"
+            };
+            
+            resultDiv.innerHTML = `
+                <h3 style="color: #667eea; margin-bottom: 1rem;">Hasil Tes Minat Bakatmu</h3>
+                <div class="result-card">
+                    <p style="font-size: 1.2rem; line-height: 1.6;">${results[resultType]}</p>
+                    <button class="cta-button" onclick="restartQuiz()" style="margin-top: 1.5rem; padding: 12px 25px;">🔄 Tes Ulang</button>
+                </div>
+            `;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = { social: 0, independent: 0, creative: 0, analytical: 0 };
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            document.querySelectorAll('.option-btn').forEach((btn, index) => {
+                btn.style.background = 'white';
+                btn.disabled = false;
+                btn.textContent = `Pilih opsi ${index + 1}`;
+            });
+            document.getElementById('nextBtn').style.display = 'none';
+            document.querySelector('.quiz-question h3').textContent = questions[0];
+        }
+
+        // Chat Widget
+        function openChat() {
+            document.getElementById('chatWidget').style.display = 'flex';
+        }
+
+        function closeChat() {
+            document.getElementById('chatWidget').style.display = 'none';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (message) {
+                const messages = document.getElementById('chatMessages');
+                messages.innerHTML += `<div class="message user">${message}</div>`;
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+                
+                // Bot response
+                setTimeout(() => {
+                    const responses = [
+                        "Terima kasih sudah berbagi 😊 Apa yang sedang kamu rasakan?",
+                        "Itu wajar kok! Sudah coba teknik pernapasan 4-7-8?",
+                        "Kamu tidak sendiri 🙌 Mari kita cari solusinya bersama",
+                        "Bagus sekali! 💪 Itu langkah positif. Apa rencanamu selanjutnya?",
+                        "Saya paham perasaanmu. Ingin cerita lebih detail?",
+                        "Keren! Terus semangat ya! Apa yang bisa saya bantu lagi?",
+                        "Jangan khawatir, semua akan baik-baik saja 💙"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    messages.innerHTML += `<div class="message bot">${randomResponse}</div>`;
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1200);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Navbar highlight on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                if (scrollPos > section.offsetTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-menu a').forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === `#${current}`) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🌟 Edukasi BK Siap Digunakan!');
+        });
+    </script>
+</body>
+</html>
